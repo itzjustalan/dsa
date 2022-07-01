@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA</title>
+</head>
+<body>
+    <a href="/">go home</a>
+    <h1><i>Stack</i></h1>
+
+    <button id="reset-button">reset</button>
+    <button id="pop-button">pop</button>
+    <ol id="elements-list"></ol>
+    <input id="element-name">
+    <button id="push-button">push</button>
+
+    <script type="module">
+        import Stack from '../js/ds/stack.js'
+
+        const stack = new Stack()
+        const list = document.getElementById('elements-list')
+        const input = document.getElementById('element-name')
+        const popbtn = document.getElementById('pop-button')
+        const pushbtn = document.getElementById('push-button')
+        const resetbtn = document.getElementById('reset-button')
+        const reset = () => {
+            let elements = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+            elements.forEach(element => stack.push(element))
+            render()
+        }
+        const render = () => {
+            let current = stack.last
+            list.textContent = ''
+            while (current) {
+                if(current.value) {
+                    const elm = document.createElement('li')
+                    elm.appendChild(document.createTextNode(current.value))
+                    list.appendChild(elm)
+                }
+                current = current.next
+            }
+        }
+        const handlePush = () => {
+            if(!input.value) {
+                alert('provide input!')
+                return
+            }
+            alert(stack.push(input.value))
+            input.value = ''
+            render()
+        }
+        const handlePop = () => {
+            alert(stack.pop())
+            render()
+        }
+        input.onkeydown = e => {
+            if(e.keyCode === 13) handlePush()
+        }
+        pushbtn.onclick = handlePush
+        popbtn.onclick = handlePop
+        resetbtn.onclick = reset
+    </script>
+</body>
+</html>
