@@ -7,11 +7,15 @@ class Node {
 
 export default class SinglyLinkedList {
     constructor(){
+        this.reset()
+    }
+    reset() {
         this.head = this.tail = null
         this.length = 0
     }
 
-    // The push method takes a value as parameter and assigns it as the tail of the list
+    // The push method takes a value as parameter
+    // and assigns it as the tail of the list
     push(value) {
         let _n = new Node(value)
         if(!this.head) {
@@ -58,7 +62,8 @@ export default class SinglyLinkedList {
         return _t.value
     }
 
-    // The unshift method takes a value as parameter and assigns it as the head of the list
+    // The unshift method takes a value as parameter
+    // and assigns it as the head of the list
     unshift(value) {
         let _n = new Node(value)
         this.length++
@@ -72,28 +77,43 @@ export default class SinglyLinkedList {
     }
 
 
-    // The get method takes an index number as parameter and returns the value of the node at that index
+    // The get method takes an index number as parameter
+    // and returns the value of the node at that index
     get(index) {
         if(index < 0 || index >= this.length) return null
         let _c = this.head
-        while(index) {
+        console.log(index, _c.value, _c.next)
+        while(index > 0) {
             index--
+            console.log(index, _c.value, _c.next)
             _c = _c.next
         }
         return _c.value
     }
 
 
-    // The set method takes an index number and a value as parameters, and modifies the node value at the given index in the list
-    set(index, value) {}
+    // The set method takes an index number and a value as parameters
+    // and modifies the node value at the given index in the list
+    set(index, value) {
+        if(index < 0 || index >= this.length) return null
+        let _c = this.head
+        while(index > 0) {
+            index--
+            _c = _c.next
+        }
+        _c.value = value
+    }
         
-    // The insert method takes an index number and a value as parameters, and inserts the value at the given index in the list
+    // The insert method takes an index number and a value as parameters
+    // and inserts the value at the given index in the list
     insert(index, value) {}
 
-    // The remove method takes an index number as parameter and removes the node at the given index in the list
+    // The remove method takes an index number as parameter
+    // and removes the node at the given index in the list
     remove(index) {}
 
-    // The reverse method reverses the list and all pointers so that the head becomes the tail and the tail becomes the head
+    // The reverse method reverses the list and all pointers
+    // so that the head becomes the tail and the tail becomes the head
     reverse() {}
 
     pretty() {

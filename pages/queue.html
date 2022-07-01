@@ -7,14 +7,22 @@
     <title>DSA</title>
 </head>
 <body>
-    <a href="/">go home</a>
+    <a href="../">go home</a>
     <h1><i>Queue</i></h1>
 
     <button id="reset-button">reset</button>
     <button id="pop-button">pop</button>
     <ol id="elements-list"></ol>
-    <input id="element-name">
+    <input id="element-name" placeholder="value">
     <button id="push-button">push</button>
+
+
+    <div class="code">
+        <h3>Implementation:</h3>
+        <object data="../js/ds/queue.js" type="text/javascript" style="width:100%;height:100vh">
+            Preview Not supported
+        </object>
+    </div>
 
     <script type="module">
         import Queue from '../js/ds/queue.js'
@@ -26,6 +34,7 @@
         const pushbtn = document.getElementById('push-button')
         const resetbtn = document.getElementById('reset-button')
         const reset = () => {
+            queue.reset()
             let elements = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
             elements.forEach(element => queue.enque(element))
             render()

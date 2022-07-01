@@ -6,7 +6,10 @@ class Node {
 }
 
 export default class Queue {
-    constructor() {
+    constructor(){
+        this.reset()
+    }
+    reset() {
         this.first = this.last = null
         this.length = 0
     }

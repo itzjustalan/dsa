@@ -6,7 +6,10 @@ class Node {
 }
 
 export default class Stack {
-    constructor() {
+    constructor(){
+        this.reset()
+    }
+    reset() {
         this.last = null
         this.length = 0
     }
