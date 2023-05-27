@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA</title>
+</head>
+<body>
+    <a href="../">go home</a>
+    <h1><i>Queue</i></h1>
+
+    <button id="reset-button">reset</button>
+    <button id="pop-button">pop</button>
+    <ol id="elements-list"></ol>
+    <input id="element-name" placeholder="value">
+    <button id="push-button">push</button>
+
+
+    <div class="code">
+        <h3>Implementation:</h3>
+        <object data="../js/ds/queue.js" type="text/javascript" style="width:100%;height:100vh">
+            Preview Not supported
+        </object>
+    </div>
+
+    <script type="module">
+        import Queue from '../js/ds/queue.js'
+
+        const queue = new Queue()
+        const list = document.getElementById('elements-list')
+        const input = document.getElementById('element-name')
+        const popbtn = document.getElementById('pop-button')
+        const pushbtn = document.getElementById('push-button')
+        const resetbtn = document.getElementById('reset-button')
+        const reset = () => {
+            queue.reset()
+            let elements = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+            elements.forEach(element => queue.enque(element))
+            render()
+        }
+        const render = () => {
+            let current = queue.first
+            list.textContent = ''
+            while (current) {
+                if(current.value) {
+                    const elm = document.createElement('li')
+                    elm.appendChild(document.createTextNode(current.value))
+                    list.appendChild(elm)
+                }
+                current = current.next
+            }
+        }
+        const handlePush = () => {
+            if(!input.value) {
+                alert('provide input!')
+                return
+            }
+            alert(queue.enque(input.value))
+            input.value = ''
+            render()
+        }
+        const handlePop = () => {
+            alert(queue.dequeue())
+            render()
+        }
+        input.onkeydown = e => {
+            if(e.keyCode === 13) handlePush()
+        }
+        pushbtn.onclick = handlePush
+        popbtn.onclick = handlePop
+        resetbtn.onclick = reset
+    </script>
+</body>
+</html>

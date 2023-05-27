@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA</title>
+</head>
+<body>
+    <a href="../">go home</a>
+    <h1><i>Singly Linked List</i></h1>
+
+    <button id="reset-button">reset</button>
+    <button id="pop-button">pop</button>
+    <button id="shift-button">shift</button>
+    <button id="reverse-button">reverse</button>
+    <ol id="elements-list" start="0"></ol>
+    <input id="element-name" placeholder="value">
+    <button id="push-button">push</button>
+    <button id="unshift-button">unshift</button>
+    <input id="element-index" type="number" min="0" placeholder="index">
+    <button id="get-button">get</button>
+    <button id="set-button">set</button>
+    <button id="insert-button">insert</button>
+    <button id="remove-button">remove</button>
+
+
+    <div class="code">
+        <h3>Implementation:</h3>
+        <object data="../js/ds/singlyLinkedList.js" type="text/javascript" style="width:100%;height:100vh">
+            Preview Not supported
+        </object>
+    </div>
+
+    <script type="module">
+        import SinglyLinkedList from '../js/ds/singlyLinkedList.js'
+
+        const singlyLinkedList = new SinglyLinkedList()
+        const list = document.getElementById('elements-list')
+        const input = document.getElementById('element-name')
+        const popbtn = document.getElementById('pop-button')
+        const pushbtn = document.getElementById('push-button')
+        const shiftbtn = document.getElementById('shift-button')
+        const unshiftbtn = document.getElementById('unshift-button')
+        const resetbtn = document.getElementById('reset-button')
+        const getinput = document.getElementById('element-index')
+        const getbtn = document.getElementById('get-button')
+        const setbtn = document.getElementById('set-button')
+        const insertbtn = document.getElementById('insert-button')
+        const removebtn = document.getElementById('remove-button')
+        const reversebtn = document.getElementById('reverse-button')
+        const reset = () => {
+            singlyLinkedList.reset()
+            let elements = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+            elements.forEach(element => singlyLinkedList.push(element))
+            render()
+        }
+        const render = () => {
+            let current = singlyLinkedList.head
+            list.textContent = ''
+            while (current) {
+                if(current.value) {
+                    const elm = document.createElement('li')
+                    elm.appendChild(document.createTextNode(current.value))
+                    list.appendChild(elm)
+                }
+                current = current.next
+            }
+        }
+        const handlePush = () => {
+            if(!input.value) {
+                alert('provide input!')
+                return
+            }
+            alert(singlyLinkedList.push(input.value))
+            input.value = ''
+            render()
+        }
+        const handlePop = () => {
+            alert(singlyLinkedList.pop())
+            render()
+        }
+        const handleShift = () => {
+            alert(singlyLinkedList.shift())
+            render()
+        }
+        const handleUnshift = () => {
+            if(!input.value) {
+                alert('provide input!')
+                return
+            }
+            alert(singlyLinkedList.unshift(input.value))
+            input.value = ''
+            render()
+        }
+        const handleGet = () => {
+            if(getinput.value >= singlyLinkedList.length) {
+                alert(`value must be less than ${singlyLinkedList.length} and greater than 0`)
+                return
+            }
+            alert(singlyLinkedList.get(getinput.value))
+        }
+        const handleSet = () => {
+            if(!input.value) {
+                alert('provide input!')
+                return
+            }
+            if(getinput.value >= singlyLinkedList.length) {
+                alert(`value must be less than ${singlyLinkedList.length} and greater than 0`)
+                return
+            }
+            singlyLinkedList.set(getinput.value, input.value)
+            render()
+        }
+        const handleInsert = () => {
+            if(!input.value) {
+                alert('provide input!')
+                return
+            }
+            if(getinput.value >= singlyLinkedList.length) {
+                alert(`value must be less than ${singlyLinkedList.length} and greater than 0`)
+                return
+            }
+            singlyLinkedList.insert(getinput.value, input.value)
+            render()
+        }
+        const handleRemove = () => {
+            if(getinput.value >= singlyLinkedList.length) {
+                alert(`value must be less than ${singlyLinkedList.length} and greater than 0`)
+                return
+            }
+            singlyLinkedList.remove(getinput.value)
+            render()
+        }
+        const handleReverse = () => {
+            singlyLinkedList.reverse()
+            render()
+        }
+        input.onkeydown = e => {
+            if(e.keyCode === 13) handlePush()
+        }
+        getinput.onkeydown = e => {
+            if(e.keyCode === 13) handleGet()
+        }
+        resetbtn.onclick = reset
+        popbtn.onclick = handlePop
+        pushbtn.onclick = handlePush
+        shiftbtn.onclick = handleShift
+        unshiftbtn.onclick = handleUnshift
+        getbtn.onclick = handleGet
+        setbtn.onclick = handleSet
+        insertbtn.onclick = handleInsert
+        removebtn.onclick = handleRemove
+        reversebtn.onclick = handleReverse
+    </script>
+</body>
+</html>
