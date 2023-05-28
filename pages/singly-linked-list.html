@@ -1,41 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSA</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles.css">
+    <script defer src="../js/script.js"></script>
+    <title>DSA - Singly Linked List</title>
 </head>
+
 <body>
-    <a href="../">go home</a>
-    <h1><i>Singly Linked List</i></h1>
+    <main class="container">
+        <section id="heading">
+            <header>
+                <hgroup>
+                    <h1><i>Singly Linked List</i></h1>
+                    <a href="../" class="outline contrast"><strong>go home</strong></a>
+                </hgroup>
+                <blockquote id="description"></blockquote>
+            </header>
+        </section>
 
-    <button id="reset-button">reset</button>
-    <button id="pop-button">pop</button>
-    <button id="shift-button">shift</button>
-    <button id="reverse-button">reverse</button>
-    <ol id="elements-list" start="0"></ol>
-    <input id="element-name" placeholder="value">
-    <button id="push-button">push</button>
-    <button id="unshift-button">unshift</button>
-    <input id="element-index" type="number" min="0" placeholder="index">
-    <button id="get-button">get</button>
-    <button id="set-button">set</button>
-    <button id="insert-button">insert</button>
-    <button id="remove-button">remove</button>
+        <section id="controls">
+            <div class="grid">
+                <button id="reset-button" class="outline danger">reset</button>
+                <button id="push-button" class="outline">push</button>
+                <button id="pop-button" class="outline">pop</button>
+                <button id="shift-button" class="outline">shift</button>
+                <button id="unshift-button" class="outline">unshift</button>
+            </div>
+            <input id="element-name" placeholder="value">
+            <input id="element-index" type="number" min="0" placeholder="index">
+            <div class="grid">
+                <button id="reverse-button" class="outline danger">reverse</button>
+                <button id="get-button" class="outline">get</button>
+                <button id="set-button" class="outline">set</button>
+                <button id="insert-button" class="outline">insert</button>
+                <button id="remove-button" class="outline">remove</button>
+            </div>
+            <ol id="elements-list" start="0">list</ol>
+            <section id="output">output</section>
+        </section>
+
+        <!-- <button id="reset-button">reset</button> -->
+        <!-- <button id="pop-button">pop</button> -->
+        <!-- <button id="shift-button">shift</button> -->
+        <!-- <button id="reverse-button">reverse</button> -->
+        <!-- <input id="element-name" placeholder="value"> -->
+        <!-- <button id="push-button">push</button> -->
+        <!-- <button id="unshift-button">unshift</button> -->
+        <!-- <input id="element-index" type="number" min="0" placeholder="index"> -->
+        <!-- <button id="get-button">get</button>
+        <button id="set-button">set</button>
+        <button id="insert-button">insert</button>
+        <button id="remove-button">remove</button> -->
 
 
-    <div class="code">
-        <h3>Implementation:</h3>
-        <object data="../js/ds/singlyLinkedList.js" type="text/javascript" style="width:100%;height:100vh">
-            Preview Not supported
-        </object>
-    </div>
+        <!-- <div class="code">
+            <h3>Implementation:</h3>
+            <object data="../js/ds/singlyLinkedList.js" type="text/javascript" style="width:100%;height:100vh">
+                Preview Not supported
+            </object>
+        </div> -->
 
+        <section id="implementation" class="line-numbers">
+            <pre data-src="../js/ds/singlyLinkedList.js"></pre>
+            <script src="../xtra/prism/prism.js"></script>
+        </section>
+    </main>
     <script type="module">
         import SinglyLinkedList from '../js/ds/singlyLinkedList.js'
 
         const singlyLinkedList = new SinglyLinkedList()
+        document.getElementById('description').innerText = singlyLinkedList.description
         const list = document.getElementById('elements-list')
         const input = document.getElementById('element-name')
         const popbtn = document.getElementById('pop-button')
@@ -51,6 +90,7 @@
         const reversebtn = document.getElementById('reverse-button')
         const reset = () => {
             singlyLinkedList.reset()
+            reset_output()
             let elements = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
             elements.forEach(element => singlyLinkedList.push(element))
             render()
@@ -59,7 +99,7 @@
             let current = singlyLinkedList.head
             list.textContent = ''
             while (current) {
-                if(current.value) {
+                if (current.value) {
                     const elm = document.createElement('li')
                     elm.appendChild(document.createTextNode(current.value))
                     list.appendChild(elm)
@@ -68,79 +108,79 @@
             }
         }
         const handlePush = () => {
-            if(!input.value) {
-                alert('provide input!')
+            if (!input.value) {
+                echo.error('invalid input!');
                 return
             }
-            alert(singlyLinkedList.push(input.value))
+            echo.info('push:', singlyLinkedList.push(input.value))
             input.value = ''
             render()
         }
         const handlePop = () => {
-            alert(singlyLinkedList.pop())
+            echo.info('pop:', singlyLinkedList.pop())
             render()
         }
         const handleShift = () => {
-            alert(singlyLinkedList.shift())
+            echo.info('shift:', singlyLinkedList.shift())
             render()
         }
         const handleUnshift = () => {
-            if(!input.value) {
-                alert('provide input!')
+            if (!input.value) {
+                echo.error('invalid input!');
                 return
             }
-            alert(singlyLinkedList.unshift(input.value))
+            echo.info('unshift:', singlyLinkedList.unshift(input.value))
             input.value = ''
             render()
         }
         const handleGet = () => {
-            if(getinput.value >= singlyLinkedList.length) {
-                alert(`value must be less than ${singlyLinkedList.length} and greater than 0`)
+            if (getinput.value >= singlyLinkedList.length) {
+                echo.error(`value must be less than ${singlyLinkedList.length} and greater than 0`)
                 return
             }
-            alert(singlyLinkedList.get(getinput.value))
+            echo.info('get:', getinput.value, singlyLinkedList.get(getinput.value))
         }
         const handleSet = () => {
-            if(!input.value) {
-                alert('provide input!')
+            if (!input.value) {
+                echo.error('invalid input!');
                 return
             }
-            if(getinput.value >= singlyLinkedList.length) {
-                alert(`value must be less than ${singlyLinkedList.length} and greater than 0`)
+            if (getinput.value >= singlyLinkedList.length) {
+                echo.error(`value must be less than ${singlyLinkedList.length} and greater than 0`)
                 return
             }
-            singlyLinkedList.set(getinput.value, input.value)
+            echo.info('set:', input.value, singlyLinkedList.set(getinput.value, input.value))
             render()
         }
         const handleInsert = () => {
-            if(!input.value) {
-                alert('provide input!')
+            if (!input.value) {
+                echo.error('invalid input!');
                 return
             }
-            if(getinput.value >= singlyLinkedList.length) {
-                alert(`value must be less than ${singlyLinkedList.length} and greater than 0`)
+            if (getinput.value >= singlyLinkedList.length) {
+                echo.error(`value must be less than ${singlyLinkedList.length} and greater than 0`)
                 return
             }
-            singlyLinkedList.insert(getinput.value, input.value)
+            echo.info('insert:', getinput.value, input.value, singlyLinkedList.insert(getinput.value, input.value))
             render()
         }
         const handleRemove = () => {
-            if(getinput.value >= singlyLinkedList.length) {
-                alert(`value must be less than ${singlyLinkedList.length} and greater than 0`)
+            if (getinput.value >= singlyLinkedList.length) {
+                echo.error(`value must be less than ${singlyLinkedList.length} and greater than 0`)
                 return
             }
-            singlyLinkedList.remove(getinput.value)
+            echo.info('remove:', singlyLinkedList.remove(getinput.value))
             render()
         }
         const handleReverse = () => {
-            singlyLinkedList.reverse()
+            echo.info('reverse:', singlyLinkedList.reverse())
             render()
         }
         input.onkeydown = e => {
-            if(e.keyCode === 13) handlePush()
+            if (e.keyCode === 13) handlePush()
         }
         getinput.onkeydown = e => {
-            if(e.keyCode === 13) handleGet()
+            if (e.keyCode === 13) handleGet()
         }
         resetbtn.onclick = reset
         popbtn.onclick = handlePop
@@ -152,6 +192,8 @@
         insertbtn.onclick = handleInsert
         removebtn.onclick = handleRemove
         reversebtn.onclick = handleReverse
+        reset_output()
     </script>
 </body>
+
 </html>

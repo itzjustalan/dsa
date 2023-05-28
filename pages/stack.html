@@ -8,7 +8,7 @@
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles.css">
     <script defer src="../js/script.js"></script>
-    <title>DSA</title>
+    <title>DSA - Stack</title>
 </head>
 
 <body>
@@ -19,6 +19,7 @@
                     <h1><i>Stack</i></h1>
                     <a href="../" class="outline contrast"><strong>go home</strong></a>
                 </hgroup>
+                <blockquote id="description"></blockquote>
             </header>
         </section>
 
@@ -37,118 +38,58 @@
             <pre data-src="../js/ds/stack.js"></pre>
             <script src="../xtra/prism/prism.js"></script>
         </section>
-
-        <!-- <pre><code class="language-js">let d = 2;</code></pre>
-        <link rel="stylesheet" href="../xtra/highlight/styles/tokyo-night-dark.min.css">
-        <script src="../xtra/highlight/highlight.min.js"></script>
-        <script>hljs.highlightAll()</script> -->
-
-        <!-- <section id="implementation">
-            <h3>Implementation:</h3>
-            <pre><code></code></pre>
-            <pre><code id="hljs-implementation" class="language-js"></code></pre>
-            <div id="hljs-implementation"></div>
-            <object data="../js/ds/stack.js" type="text/javascript">Preview Not supported</object>
-            <link rel="stylesheet" href="../xtra/highlight/styles/tokyo-night-dark.min.css">
-            <script src="../xtra/highlight/highlight.min.js"></script>
-            <script>
-                const obj = document.querySelector('#implementation object')
-                const precode = document.querySelector('#hljs-implementation')
-                hljs.configure({ cssSelector: '#hljs-implementation', languages: ['js'] });
-                obj.addEventListener('load', () => {
-                    const doc = obj.contentDocument;
-                    const code = doc.body.childNodes[0].textContent.replaceAll('\n', '<br>');
-                    precode.innerHTML = code;
-                    hljs.highlightAll();
-                    obj.hidden = true;
-                });
-            </script>
-        </section> -->
-
-
-        <!-- <section id="implementation">
-            <h3>Implementation:</h3>
-            <object data="../js/ds/stack.js" type="text/javascript" hidden>
-                Preview Not supported
-            </object>
-            <script>
-                // hljs.configure({ cssSelector: 'object' });
-                // hljs.highlightAll();
-                const obj = document.querySelector('#implementation object')
-                obj.addEventListener('load', () => {
-                    const doc = obj.contentDocument;
-                    const style = doc.createElement('link');
-                    const hljs = doc.createElement('script');
-                    const script = doc.createElement('script');
-                    const code = `
-                    document.onload = () => {
-                        hljs.configure({ cssSelector: 'pre' });
-                        hljs.highlightAll();
-                        console.log(hljs);
-                    }`
-                    style.setAttribute('href', '../../xtra/highlight/styles/tokyo-night-dark.min.css');
-                    style.setAttribute("rel", "stylesheet");
-                    hljs.src = "../../xtra/highlight/highlight.min.js";
-                    script.type = 'text/javascript';
-                    script.appendChild(document.createTextNode(code));
-                    doc.body.appendChild(hljs);
-                    doc.body.appendChild(style);
-                    doc.body.appendChild(script);
-                })
-            </script>
-        </section> -->
-
-        <script type="module">
-            import Stack from '../js/ds/stack.js'
-
-            const stack = new Stack()
-            const list = document.getElementById('elements-list')
-            const input = document.getElementById('element-name')
-            const popbtn = document.getElementById('pop-button')
-            const pushbtn = document.getElementById('push-button')
-            const resetbtn = document.getElementById('reset-button')
-            const reset = () => {
-                stack.reset()
-                reset_output();
-                let elements = ['a', 'b', 'c', 'd']
-                // let elements = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-                elements.forEach(element => stack.push(element))
-                render()
-            }
-            const render = () => {
-                let current = stack.last
-                list.textContent = ''
-                while (current) {
-                    if (current.value) {
-                        const elm = document.createElement('li')
-                        elm.appendChild(document.createTextNode(current.value))
-                        list.appendChild(elm)
-                    }
-                    current = current.next
-                }
-            }
-            const handlePush = () => {
-                if (!input.value) {
-                    echo.error('invalid input!');
-                    return
-                }
-                echo.info('push:', stack.push(input.value))
-                input.value = ''
-                render()
-            }
-            const handlePop = () => {
-                echo.info('pop:', stack.pop())
-                render()
-            }
-            input.onkeydown = e => {
-                if (e.keyCode === 13) handlePush()
-            }
-            pushbtn.onclick = handlePush
-            popbtn.onclick = handlePop
-            resetbtn.onclick = reset
-            reset_output()
-        </script>
     </main>
+
+    <script type="module">
+        import Stack from '../js/ds/stack.js'
+
+        const stack = new Stack()
+        document.getElementById('description').innerText = stack.description
+        const list = document.getElementById('elements-list')
+        const input = document.getElementById('element-name')
+        const popbtn = document.getElementById('pop-button')
+        const pushbtn = document.getElementById('push-button')
+        const resetbtn = document.getElementById('reset-button')
+        const reset = () => {
+            stack.reset()
+            reset_output()
+            let elements = ['a', 'b', 'c', 'd']
+            elements.forEach(element => stack.push(element))
+            render()
+        }
+        const render = () => {
+            let current = stack.last
+            list.textContent = ''
+            while (current) {
+                if (current.value) {
+                    const elm = document.createElement('li')
+                    elm.appendChild(document.createTextNode(current.value))
+                    list.appendChild(elm)
+                }
+                current = current.next
+            }
+        }
+        const handlePush = () => {
+            if (!input.value) {
+                echo.error('invalid input!');
+                return
+            }
+            echo.info('push:', stack.push(input.value))
+            input.value = ''
+            render()
+        }
+        const handlePop = () => {
+            echo.info('pop:', stack.pop())
+            render()
+        }
+        input.onkeydown = e => {
+            if (e.keyCode === 13) handlePush()
+        }
+        pushbtn.onclick = handlePush
+        popbtn.onclick = handlePop
+        resetbtn.onclick = reset
+        reset_output()
+    </script>
 </body>
 
 </html>

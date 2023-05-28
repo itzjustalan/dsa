@@ -23,7 +23,8 @@ export default class Queue {
             this.last.next = _n
             this.last = _n
         }
-        return ++this.length
+        this.length++
+        return value
     }
 
     // remove oldest value from queue
@@ -53,21 +54,19 @@ export default class Queue {
     contains(value) {
         // todo
     }
+
+    description = `
+Queues work in a very similar way to stacks,
+but elements follow a different pattern for add and removal.
+Queues allow only a FIFO pattern (first in, first out).
+In queues, elements can't be added or removed out of order,
+they always have to follow the FIFO pattern.
+
+bigO:-
+
+Insertion - O(1)
+Removal - O(1)
+Searching - O(n)
+Access - O(n)
+    `
 }
-
-/*
-    Queue:-
-
-    Queues work in a very similar way to stacks,
-    but elements follow a different pattern for add and removal.
-    Queues allow only a FIFO pattern (first in, first out).
-    In queues, elements can't be added or removed out of order,
-    they always have to follow the FIFO pattern.
-
-    bigO:-
-
-    Insertion - O(1)
-    Removal - O(1)
-    Searching - O(n)
-    Access - O(n)
-*/

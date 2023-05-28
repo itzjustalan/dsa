@@ -106,31 +106,36 @@ export default class SinglyLinkedList {
         
     // The insert method takes an index number and a value as parameters
     // and inserts the value at the given index in the list
-    insert(index, value) {}
+    insert(index, value) {
+        return 'uninplemented'
+    }
 
     // The remove method takes an index number as parameter
     // and removes the node at the given index in the list
-    remove(index) {}
+    remove(index) {
+        return 'uninplemented'
+    }
 
     // The reverse method reverses the list and all pointers
     // so that the head becomes the tail and the tail becomes the head
-    reverse() {}
+    reverse() {
+        return 'uninplemented'
+    }
 
     pretty() {
         return JSON.parse(JSON.stringify(this))
     }
+
+    description = `
+Linked lists are a type of data structure that store values in the form of a list.
+Within the list, each value is considered a node, and each node is connected with the
+following value in the list (or null in case the element is the last in the list) through a pointer.
+
+bigO:-
+
+Insertion - O(1)
+Removal - O(n)
+Search - O(n)
+Access - O(n)
+    `
 }
-/*
-    Linked list:-
-
-    Linked lists are a type of data structure that store values in the form of a list.
-    Within the list, each value is considered a node, and each node is connected with the
-    following value in the list (or null in case the element is the last in the list) through a pointer.
-
-    bigO:-
-
-    Insertion - O(1)
-    Removal - O(n)
-    Search - O(n)
-    Access - O(n)
-*/

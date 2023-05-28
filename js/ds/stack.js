@@ -9,6 +9,7 @@ export default class Stack {
     constructor(){
         this.reset()
     }
+
     reset() {
         this.last = null
         this.length = 0
@@ -19,7 +20,8 @@ export default class Stack {
         let _n = new Node(value)
         _n.next = this.last
         this.last = _n
-        return ++this.length
+        this.length++
+        return value
     }
 
     // return most recently added value
@@ -34,19 +36,17 @@ export default class Stack {
     pretty() {
         return JSON.parse(JSON.stringify(this))
     }
+    
+    description = `
+Stacks are a data structure that store information in the form of a list.
+They allow only adding and removing elements under a LIFO pattern (last in, first out).
+In stacks, elements can't be added or removed out of order, they always have to follow the LIFO pattern.
+
+bigO:-
+
+Insertion - O(1)
+Removal - O(1)
+Searching - O(n)
+Access - O(n)
+        `
 }
-
-/*
-    Stacks:-
-
-    Stacks are a data structure that store information in the form of a list.
-    They allow only adding and removing elements under a LIFO pattern (last in, first out).
-    In stacks, elements can't be added or removed out of order, they always have to follow the LIFO pattern.
-
-    bigO:-
-
-    Insertion - O(1)
-    Removal - O(1)
-    Searching - O(n)
-    Access - O(n)
-*/

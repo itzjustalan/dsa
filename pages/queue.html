@@ -1,33 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSA</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles.css">
+    <script defer src="../js/script.js"></script>
+    <title>DSA - Queue</title>
 </head>
+
 <body>
-    <a href="../">go home</a>
-    <h1><i>Queue</i></h1>
+    <main class="container">
+        <section id="heading">
+            <header>
+                <hgroup>
+                    <h1><i>Queue</i></h1>
+                    <a href="../" class="outline contrast"><strong>go home</strong></a>
+                </hgroup>
+                <blockquote id="description"></blockquote>
+            </header>
+        </section>
 
-    <button id="reset-button">reset</button>
-    <button id="pop-button">pop</button>
-    <ol id="elements-list"></ol>
-    <input id="element-name" placeholder="value">
-    <button id="push-button">push</button>
+        <section id="controls">
+            <input id="element-name" placeholder="value">
+            <div class="grid">
+                <button id="reset-button" class="outline danger">reset</button>
+                <button id="pop-button" class="danger">pop</button>
+                <button id="push-button" class="outline">push</button>
+            </div>
+            <ol id="elements-list"></ol>
+            <section id="output">output</section>
+        </section>
 
+        <section id="implementation" class="line-numbers">
+            <pre data-src="../js/ds/queue.js"></pre>
+            <script src="../xtra/prism/prism.js"></script>
+        </section>
 
-    <div class="code">
-        <h3>Implementation:</h3>
-        <object data="../js/ds/queue.js" type="text/javascript" style="width:100%;height:100vh">
-            Preview Not supported
-        </object>
-    </div>
+        <!-- <div class="code">
+            <h3>Implementation:</h3>
+            <object data="../js/ds/queue.js" type="text/javascript" style="width:100%;height:100vh">
+                Preview Not supported
+            </object>
+        </div> -->
+    </main>
 
     <script type="module">
         import Queue from '../js/ds/queue.js'
 
         const queue = new Queue()
+        document.getElementById('description').innerText = queue.description
         const list = document.getElementById('elements-list')
         const input = document.getElementById('element-name')
         const popbtn = document.getElementById('pop-button')
@@ -35,7 +59,8 @@
         const resetbtn = document.getElementById('reset-button')
         const reset = () => {
             queue.reset()
-            let elements = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+            reset_output()
+            let elements = ['a', 'b', 'c', 'd']
             elements.forEach(element => queue.enque(element))
             render()
         }
@@ -43,7 +68,7 @@
             let current = queue.first
             list.textContent = ''
             while (current) {
-                if(current.value) {
+                if (current.value) {
                     const elm = document.createElement('li')
                     elm.appendChild(document.createTextNode(current.value))
                     list.appendChild(elm)
@@ -52,24 +77,26 @@
             }
         }
         const handlePush = () => {
-            if(!input.value) {
-                alert('provide input!')
+            if (!input.value) {
+                echo.error('invalid input!');
                 return
             }
-            alert(queue.enque(input.value))
+            echo.info('enque:', queue.enque(input.value))
             input.value = ''
             render()
         }
         const handlePop = () => {
-            alert(queue.dequeue())
+            echo.info('dequeue:', queue.dequeue())
             render()
         }
         input.onkeydown = e => {
-            if(e.keyCode === 13) handlePush()
+            if (e.keyCode === 13) handlePush()
         }
         pushbtn.onclick = handlePush
         popbtn.onclick = handlePop
         resetbtn.onclick = reset
+        reset_output()
     </script>
 </body>
+
 </html>

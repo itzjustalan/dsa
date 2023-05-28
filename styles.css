@@ -2,11 +2,6 @@
 /* @import "xtra/prism/prism.css"; */
 @import "xtra/prism/night-owl.css";
 
-object {
-    height: 100vh;
-    width: 100%;
-}
-
 #output {
     padding: var(--spacing);
     color: var(--code-color);
@@ -14,10 +9,7 @@ object {
 }
 
 #implementation {
-    /* white-space: pre; */
     white-space: pre-line;
-    /* white-space: pre-wrap;  */
-     /* white-space: break-spaces; */
 }
 
 .danger {
