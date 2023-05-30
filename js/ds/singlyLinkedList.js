@@ -119,7 +119,24 @@ export default class SinglyLinkedList {
     // The reverse method reverses the list and all pointers
     // so that the head becomes the tail and the tail becomes the head
     reverse() {
-        return 'uninplemented'
+        // let prev = null;
+        // let next = this.head.next;
+        // while (next) {
+        //     this.head.next = prev;
+        //     this.head = this.head;
+        //     prev = next;
+        //     next = next.next
+        // }
+
+        let prev = null
+        let curr = this.head
+        while (curr) {
+            let next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
+        }
+        this.head = prev
     }
 
     pretty() {
@@ -127,9 +144,9 @@ export default class SinglyLinkedList {
     }
 
     description = `
-Linked lists are a type of data structure that store values in the form of a list.
-Within the list, each value is considered a node, and each node is connected with the
-following value in the list (or null in case the element is the last in the list) through a pointer.
+A linked list is like a conga line. Everyone holds the hips of the person in front of them.
+The values are stored in the form of a list. Within the list, each value is considered a node,
+and each node is connected with the following value in the list using a pointer.
 
 bigO:-
 
