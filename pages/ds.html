@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles.css">
+    <script defer src="../js/script.js"></script>
+    <title>DSA</title>
+</head>
+
+<body>
+    <main class="container">
+        <section id="heading">
+            <header>
+                <hgroup>
+                    <h1><i id="title">Data Structure</i></h1>
+                    <a href="../" class="outline contrast"><strong>go home</strong></a>
+                </hgroup>
+                <blockquote id="description">Data Structure Description</blockquote>
+            </header>
+        </section>
+
+        <section id="ds-selection">
+            <select id="ds-selector" name="selected_ds">
+                <option value="" disabled selected>Select Data Structure</option>
+            </select>
+        </section>
+
+        <section id="controls">
+            <input id="element-name" placeholder="value">
+            <div id="btns-grid"></div>
+            <ol id="elements-list">list</ol>
+            <section id="output">output</section>
+        </section>
+
+        <section id="implementation" class="line-numbers">
+            <script src="../xtra/prism/prism.js" data-manual></script>
+            <pre></pre>
+        </section>
+    </main>
+
+    <script type="module">
+        import { data_structures } from '../js/data.js'
+
+        const ds_selector = document.getElementById('ds-selector');
+        Object.keys(data_structures).map(_ds => {
+            const opt = document.createElement('option');
+            opt.value = _ds;
+            opt.innerText = _ds;
+            ds_selector.appendChild(opt);
+        });
+
+        const change_ds = (ds_name) => {
+            let ds = data_structures[ds_name].v;
+            let proto = Object.getPrototypeOf(ds);
+            document.title = 'DSA - ' + proto.constructor.name;
+            document.getElementById('description').innerText = ds.description;
+            document.getElementById('title').innerText = proto.constructor.name;
+            const btns_grid = document.getElementById('btns-grid');
+            btns_grid.replaceChildren([]);
+            Object.getOwnPropertyNames(Object.getPrototypeOf(ds)).map(method => {
+                if (method === 'constructor') return;
+                if (typeof ds[method] !== 'function') return;
+                let btn = document.createElement('button')
+                btn.id = method + '-btn';
+                btn.innerText = method;
+                btn.classList.add('outline');
+                btn.onclick = () => {
+                    //todo: assign multiple inputs from ui?
+                    echo.info(ds[method]());
+                }
+                btns_grid.appendChild(btn)
+
+            });
+            const preview = document.querySelector('section[id="implementation"] pre');
+            preview.replaceChildren([]);
+            preview.removeAttribute('data-src-status');
+            preview.setAttribute('data-src', '../js/ds/' + data_structures[ds_name].file);
+            window.Prism.highlightAll();
+            reset_output();
+        }
+
+        if (ds_selector.value !== "") change_ds(ds_selector.value);
+        ds_selector.onchange = (e => change_ds(ds_selector.value));
+
+
+        // console.log(Object.getOwnPropertyNames(Stack.prototype))
+        // console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(stack)))
+        // document.title = 'DSA - ' + Object.getPrototypeOf(ds).constructor.name;
+    </script>
+
+</body>
+
+</html>

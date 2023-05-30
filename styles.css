@@ -8,6 +8,12 @@
     background-color: var(--code-background-color);
 }
 
+#btns-grid {
+    display: grid;
+    gap: .1rem 1rem;
+    grid-template-columns: repeat(8, 1fr);
+}
+
 #implementation {
     white-space: pre-line;
 }
